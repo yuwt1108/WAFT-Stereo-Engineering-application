@@ -46,6 +46,10 @@ cmake --build C++/build --config Release --target waft_stereo -- /m:1
 
 打开`C++/build/WAFTStereo.sln`，选择Release/x64、将`waft_stereo`设为启动项目，再运行。示例图片已包含在仓库中，需自行准备兼容的TorchScript模型。VS调试配置包含依赖DLL搜索路径。
 
+## 前期相机标定
+
+前期水下双目相机标定工作见：[相机标定过程与记录](https://zhuanlan.zhihu.com/p/1962924833072451649)。
+
 ## 标定与校正检查
 
 - [`新标定参数`](C++/stereo_calibration_opencv_1224_1024.txt)

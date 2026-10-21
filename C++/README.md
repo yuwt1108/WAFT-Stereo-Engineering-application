@@ -74,3 +74,8 @@ VS2019/v142、x64 Release、C++17、OpenCV 4.12、LibTorch 2.5/CUDA 12.1，需�
 本仓库不附带data实际数据，只保留目录结构；克隆后请按[data/README.md](data/README.md)放置原始左右图，并按[data/model/README.md](data/model/README.md)准备模型。官方权重入口为[WAFT-Stereo](https://github.com/princeton-vl/WAFT-Stereo#weights-on-huggingface)及[Hugging Face SynLarge](https://huggingface.co/MemorySlices/WAFT-Stereo/tree/main/SynLarge)。官方`.pth`需转换为当前C++接口兼容的TorchScript `.pt`，不能仅更名。
 
 本仓库不包含build目录。请从仓库根目录执行`cmake -S C++ -B C++/build -G "Visual Studio 16 2019" -A x64`生成VS解决方案，按本机路径设置依赖后再构建。
+
+## 前期相机标定
+
+前期水下双目相机标定工作见：[相机标定过程与记录](https://zhuanlan.zhihu.com/p/1962924833072451649)。
+
