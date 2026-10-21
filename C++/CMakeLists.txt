@@ -1,0 +1,33 @@
+cmake_minimum_required(VERSION 3.20)
+project(WAFTStereo LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(OpenCV_DIR "D:/Ywt/opencv-4_12_0-cuda-contrib" CACHE PATH "OpenCV installation")
+set(LIBTORCH_ROOT "D:/Ywt/libtorch_121" CACHE PATH "LibTorch 2.5 CUDA 12.1")
+set(CUDA_TOOLKIT_ROOT_DIR "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.1" CACHE PATH "CUDA toolkit")
+find_package(OpenCV REQUIRED COMPONENTS core imgproc imgcodecs calib3d highgui)
+
+add_executable(waft_stereo src/main.cpp src/depth_result_handler.cpp src/depth_result_handler.hpp Directory.Build.targets)
+target_compile_definitions(waft_stereo PRIVATE WAFT_PROJECT_DIR="${CMAKE_CURRENT_SOURCE_DIR}" NOMINMAX)
+
+add_library(waft_stereo_api STATIC src/stereo_frame_processor.cpp src/stereo_frame_processor.hpp src/stereo.cpp src/stereo.hpp Directory.Build.targets)
+source_group("Build Configuration" FILES Directory.Build.targets)
+target_include_directories(waft_stereo_api PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
+target_include_directories(waft_stereo_api SYSTEM PUBLIC ${OpenCV_INCLUDE_DIRS})
+target_include_directories(waft_stereo_api SYSTEM PRIVATE "${LIBTORCH_ROOT}/include" "${LIBTORCH_ROOT}/include/torch/csrc/api/include")
+target_link_libraries(waft_stereo_api PUBLIC ${OpenCV_LIBS})
+foreach(library torch torch_cpu c10 torch_cuda c10_cuda)
+  target_link_libraries(waft_stereo_api PUBLIC "${LIBTORCH_ROOT}/lib/${library}.lib")
+endforeach()
+target_compile_definitions(waft_stereo_api PRIVATE WAFT_PROJECT_DIR="${CMAKE_CURRENT_SOURCE_DIR}" NOMINMAX)
+target_link_libraries(waft_stereo PRIVATE waft_stereo_api)
+set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT waft_stereo)
+set_target_properties(waft_stereo PROPERTIES
+  VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+  VS_DEBUGGER_ENVIRONMENT "Path=${LIBTORCH_ROOT}/lib;${OpenCV_DIR}/x64/vc16/bin;${CUDA_TOOLKIT_ROOT_DIR}/bin;$(Path)")
+if(MSVC)
+  target_compile_options(waft_stereo PRIVATE /utf-8 /bigobj /W3)
+  target_link_options(waft_stereo PRIVATE "/INCLUDE:?warp_size@cuda@at@@YAHXZ")
+  target_compile_options(waft_stereo_api PRIVATE /utf-8 /bigobj /W3)
+endif()

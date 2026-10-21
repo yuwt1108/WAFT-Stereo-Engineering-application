@@ -1,0 +1,10 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Normalize inherited PATH/Path before VS starts compiler or build tools. -->
+  <Target Name="NormalizeWaftBuildPath"
+          BeforeTargets="PrepareForBuild;SetBuildDefaultEnvironmentVariables"
+          Condition="'$(DesignTimeBuild)' != 'true'">
+    <SetEnv Name="PATH" Value="" Prefix="false" />
+    <SetEnv Name="Path" Value="" Prefix="false" />
+    <SetEnv Name="Path" Value="$(Path)" Prefix="false" />
+  </Target>
+</Project>

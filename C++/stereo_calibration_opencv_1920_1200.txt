@@ -1,0 +1,42 @@
+Stereo Camera Calibration (OpenCV format)
+Source: matlab.mat, variable: stereoParams
+Export method: MATLAB stereoParametersToOpenCV
+
+Coordinate and unit conventions
+- K: OpenCV camera matrix; principal point uses OpenCV pixel coordinates.
+- D: OpenCV order [k1, k2, p1, p2, k3].
+- R, T: camera 2 relative to camera 1.
+- Image size: OpenCV order (width, height) = (1920, 1200).
+- Translation/world units: millimeters. Depth computed with this calibration is therefore in millimeters unless converted.
+
+Left camera
+K_left =
+[ [1601.07724307918, 0, 1213.44786621934],
+  [0, 1592.82556142723, 1003.03393013441],
+  [0, 0, 1] ]
+D_left = [0.0967454490742339, 0.418992646089448, 0, 0, 0]
+
+Right camera
+K_right =
+[ [1604.08000634011, 0, 1202.82204388484],
+  [0, 1591.39062688947, 1013.40862712449],
+  [0, 0, 1] ]
+D_right = [0.0544131054105242, 0.415778634815208, 0, 0, 0]
+
+Stereo extrinsics
+R =
+[ [0.999999492716764,  0.0000841557738858605,  0.00100373503495564],
+  [-0.0000685669597100106, 0.99987954368835,   -0.0155207413530963],
+  [-0.0010049202887353,   0.0155206646566247,   0.999879042236525] ]
+T = [-59.537642042668, -0.0163069132271184, 0.335136210921734]
+
+Calibration summary
+- Stereo calibration patterns: 34
+- Mean reprojection error: 0.649870461084075 pixels
+- Left camera mean reprojection error: 0.644777809994551 pixels
+- Right camera mean reprojection error: 0.654963112173598 pixels
+- World points: 63 x 2
+- World units: millimeters
+
+Selection
+The calibration from matlab.mat is the selected set for this project. Use these parameters together; do not mix them with the earlier screenshot values (40 patterns, mean reprojection error 0.7039).

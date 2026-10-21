@@ -1,0 +1,23 @@
+**/build/
+**/.vs/
+**/__pycache__/
+*.pyc
+*.user
+*.suo
+*.obj
+*.pdb
+*.ilk
+*.exe
+*.dll
+*.lib
+*.exp
+*.pt
+*.pth
+*.onnx
+
+# Preserve data directories and placement instructions, not datasets or results.
+C++/data/**/*
+!C++/data/**/
+!C++/data/**/.gitkeep
+!C++/data/**/README.md
+!C++/data/README.md
