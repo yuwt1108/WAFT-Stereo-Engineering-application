@@ -14,7 +14,7 @@ WAFT-Stereo的Windows C++工程应用：原始双目图像 → 双目校正 → 
 
 ## 数据与模型放置
 
-`C++/data`仅保留空的input、model及放置说明，不包含日期示例目录、图片、模型或输出目录。下表是首次运行时需要自行创建和准备的位置。
+`C++/data`附带当前1224×1024的`input/1021/1021_50cm/left.png`和`right.png`示例，保留model目录及放置说明；其他历史数据、模型权重与输出目录不上传。下表列出默认输入、需自行准备的模型及自动生成的结果位置。
 
 | 内容 | 默认位置 |
 |---|---|
@@ -44,7 +44,7 @@ cmake -S C++ -B C++/build -G "Visual Studio 16 2019" -A x64
 cmake --build C++/build --config Release --target waft_stereo -- /m:1
 ```
 
-打开`C++/build/WAFTStereo.sln`，选择Release/x64、将`waft_stereo`设为启动项目，再运行。先准备好上述图片和TorchScript模型。VS调试配置包含依赖DLL搜索路径。
+打开`C++/build/WAFTStereo.sln`，选择Release/x64、将`waft_stereo`设为启动项目，再运行。示例图片已包含在仓库中，需自行准备兼容的TorchScript模型。VS调试配置包含依赖DLL搜索路径。
 
 ## 标定与校正检查
 

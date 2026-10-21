@@ -21,3 +21,7 @@ C++/data/**/*
 !C++/data/**/.gitkeep
 !C++/data/**/README.md
 !C++/data/README.md
+
+# Keep the current calibrated sample pair.
+!C++/data/input/1021/1021_50cm/left.png
+!C++/data/input/1021/1021_50cm/right.png
