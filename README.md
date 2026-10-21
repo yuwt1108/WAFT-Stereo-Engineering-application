@@ -1,6 +1,8 @@
-# WAFT-Stereo Engineering Application
+# WAFT-Stereo 水下双目测距工程
 
-WAFT-Stereo的Windows C++工程应用：原始双目图像 → 双目校正 → 视差推理 → 米制深度 → 保存与点击查询。
+本项目用于水下双目视觉测距，基于WAFT-Stereo实现Windows C++推理。使用水下标定参数处理同步左右图像，输出米制深度，并支持鼠标点击查询目标距离。
+
+处理流程：水下原始双目图像 → 双目校正 → 视差推理 → 米制深度 → 保存与点击查询。
 
 工程在 [`C++`](C++/) 中，详细用法见 [`C++/README.md`](C++/README.md)。使用LibTorch原生推理，正常运行时不调用Python。
 
